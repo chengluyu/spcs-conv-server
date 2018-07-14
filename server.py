@@ -16,10 +16,13 @@ class MainHandler(tornado.web.RequestHandler):
         easting = float(easting) * (1200 / 3937)
         northing = float(northing) * (1200 / 3937)
         if epsg is not None:
+            print('easting={}, northing={}, epsg={}'.format(easting, northing, epsg))
             self.write('{},{}'.format(*sp.to_latlon(easting, northing, epsg=epsg)))
         elif fips is not None:
+            print('easting={}, northing={}, fips={}'.format(easting, northing, fips))
             self.write('{},{}'.format(*sp.to_latlon(easting, northing, fips=fips)))
         elif abbr is not None:
+            print('easting={}, northing={}, abbr={}'.format(easting, northing, abbr))
             self.write('{},{}'.format(*sp.to_latlon(easting, northing, abbr=abbr)))
         else:
             self.write('*As least one of epsg, fips and abbr must be provided.')
